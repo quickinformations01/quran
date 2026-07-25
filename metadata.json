@@ -1,0 +1,10 @@
+{
+  "name": "Al-Quran & Namaz App",
+  "description": "Comprehensive Progressive Web App featuring Holy Quran, Manzil, Punch Surahs, and accurate local prayer times for all major Fiqhs.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

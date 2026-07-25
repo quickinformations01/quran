@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b"/>
+      <stop offset="50%" stop-color="#022c22"/>
+      <stop offset="100%" stop-color="#0a120e"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="50%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+  </defs>
+  <!-- Rounded Base Background -->
+  <rect width="512" height="512" rx="110" fill="url(#bg)"/>
+  <rect x="16" y="16" width="480" height="480" rx="96" fill="none" stroke="url(#gold)" stroke-width="4" opacity="0.4"/>
+  
+  <!-- Islamic Star Pattern Frame -->
+  <g stroke="url(#gold)" stroke-width="12" fill="none" opacity="0.95">
+    <rect x="116" y="116" width="280" height="280" rx="16" transform="rotate(45 256 256)" />
+    <rect x="116" y="116" width="280" height="280" rx="16" />
+  </g>
+
+  <!-- Crescent and Star Accent -->
+  <path d="M 276 176 A 72 72 0 1 0 276 336 A 84 84 0 1 1 276 176 Z" fill="url(#gold)"/>
+  <!-- 8 Point Star -->
+  <polygon points="310,210 318,226 336,226 322,238 327,256 310,244 293,256 298,238 284,226 302,226" fill="url(#gold)"/>
+  
+  <!-- Quran Book Motif -->
+  <path d="M 170 330 Q 256 300 342 330 L 342 370 Q 256 340 170 370 Z" fill="url(#gold)" opacity="0.8"/>
+  <path d="M 256 308 L 256 352" stroke="#022c22" stroke-width="4"/>
+</svg>

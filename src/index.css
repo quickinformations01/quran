@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .dir-rtl {
+    direction: rtl;
+    text-align: right;
+  }
+  .dir-ltr {
+    direction: ltr;
+    text-align: left;
+  }
+}
+
+/* Custom Scrollbar for Islamic Reader */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #022c22;
+}
+::-webkit-scrollbar-thumb {
+  background: #065f46;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d97706;
+}
