@@ -1,6 +1,6 @@
 {
-  "name": "Al-Quran & Namaz App",
-  "description": "Comprehensive Progressive Web App featuring Holy Quran, Manzil, Punch Surahs, and accurate local prayer times for all major Fiqhs.",
+  "name": "Al-Quran & Islamic Companion",
+  "description": "Complete offline Quran, Word-by-Word Translation, Tafsir, Audio Recitation, Prayer Times, Qibla Compass, Tasbeeh, Duas, 99 Names, and Islamic Calendar.",
   "requestFramePermissions": [
     "geolocation"
   ],
