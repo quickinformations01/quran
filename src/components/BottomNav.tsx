@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, Shield, Flame, Clock, Hash } from 'lucide-react';
+import { LayoutGrid, BookOpen, Clock, Hash, Bell, Shield, Flame } from 'lucide-react';
 
 interface Props {
   activeTab: string;
@@ -8,11 +8,11 @@ interface Props {
 
 export const BottomNav: React.FC<Props> = ({ activeTab, setActiveTab }) => {
   const tabs = [
-    { id: 'namaz', label: 'Namaz Times', icon: Clock, arabic: 'الصلاة' },
+    { id: 'home', label: 'Home Grid', icon: LayoutGrid, arabic: 'الرئيسية' },
     { id: 'quran', label: 'Quran Paak', icon: BookOpen, arabic: 'القرآن' },
-    { id: 'manzil', label: 'Manzil', icon: Shield, arabic: 'المنزل' },
-    { id: 'punch', label: 'Punch Surah', icon: Flame, arabic: 'پنج سورہ' },
+    { id: 'namaz', label: 'Namaz & Qibla', icon: Clock, arabic: 'الصلاة' },
     { id: 'tasbeeh', label: 'Tasbeeh', icon: Hash, arabic: 'التسبيح' },
+    { id: 'reminders', label: 'Reminders', icon: Bell, arabic: 'التنبيهات' },
   ];
 
   return (
@@ -25,7 +25,7 @@ export const BottomNav: React.FC<Props> = ({ activeTab, setActiveTab }) => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`relative flex flex-col items-center justify-center py-1.5 px-3 rounded-2xl transition-all duration-200 cursor-pointer ${
+              className={`relative flex flex-col items-center justify-center py-1 px-2.5 rounded-2xl transition-all duration-200 cursor-pointer ${
                 isActive
                   ? 'text-[#D4AF37] bg-[#D4AF37]/20 font-bold scale-105'
                   : 'text-emerald-100/70 hover:text-white'

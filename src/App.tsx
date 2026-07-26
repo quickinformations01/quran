@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { BottomNav } from './components/BottomNav';
+import { HomeGridView } from './components/HomeGridView';
 import { NamazTimesView } from './components/NamazTimesView';
 import { QuranView } from './components/QuranView';
 import { ManzilView } from './components/ManzilView';
 import { PunchSurahView } from './components/PunchSurahView';
 import { TasbeehView } from './components/TasbeehView';
+import { RemindersView } from './components/RemindersView';
 import { SettingsModal } from './components/SettingsModal';
 import { LocationModal } from './components/LocationModal';
 import { PWAInstallOverlay } from './components/PWAInstallOverlay';
 import { AppSettings, LocationData, Bookmark } from './types';
 import { PRESET_CITIES } from './utils/prayerCalculator';
+import { Download } from 'lucide-react';
 
 export default function App() {
   // PWA Installation Gate state
@@ -21,8 +24,13 @@ export default function App() {
     return isStandalone || unlockedLocal === 'true';
   });
 
-  // Navigation Tab ('namaz', 'quran', 'manzil', 'punch', 'tasbeeh')
-  const [activeTab, setActiveTab] = useState<string>('namaz');
+  // Check if currently running standalone PWA
+  const isStandalone = typeof window !== 'undefined' && (
+    window.matchMedia('(display-mode: standalone)').matches || (window.navigator as any).standalone === true
+  );
+
+  // Navigation Tab ('home', 'quran', 'namaz', 'tasbeeh', 'reminders', 'manzil', 'punch')
+  const [activeTab, setActiveTab] = useState<string>('home');
 
   // Location State
   const [location, setLocation] = useState<LocationData>(() => {
@@ -113,12 +121,11 @@ export default function App() {
 
           {/* Main View Area */}
           <main className="flex-1 px-4 sm:px-6 py-6">
-            {activeTab === 'namaz' && (
-              <NamazTimesView
+            {activeTab === 'home' && (
+              <HomeGridView
+                onSelectTab={setActiveTab}
                 location={location}
-                setLocation={setLocation}
                 settings={settings}
-                setSettings={setSettings}
                 onOpenLocationModal={() => setIsLocationOpen(true)}
               />
             )}
@@ -150,8 +157,32 @@ export default function App() {
               />
             )}
 
+            {activeTab === 'namaz' && (
+              <NamazTimesView
+                location={location}
+                setLocation={setLocation}
+                settings={settings}
+                setSettings={setSettings}
+                onOpenLocationModal={() => setIsLocationOpen(true)}
+              />
+            )}
+
             {activeTab === 'tasbeeh' && <TasbeehView />}
+
+            {activeTab === 'reminders' && <RemindersView />}
           </main>
+
+          {/* Floating Install Shortcut Button if not standalone PWA */}
+          {!isStandalone && (
+            <button
+              onClick={() => setIsAppUnlocked(false)}
+              className="fixed bottom-20 right-4 z-30 p-3 rounded-full bg-[#064E3B] text-[#D4AF37] border border-[#D4AF37]/50 shadow-xl hover:scale-105 active:scale-95 transition flex items-center gap-1.5 font-bold text-xs cursor-pointer"
+              title="Install App as PWA"
+            >
+              <Download className="w-4 h-4" />
+              <span className="hidden sm:inline">Install App</span>
+            </button>
+          )}
 
           {/* Bottom Tab Bar */}
           <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} />
