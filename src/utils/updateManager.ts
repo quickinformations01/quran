@@ -18,7 +18,7 @@ export const checkForAppUpdates = async (): Promise<boolean> => {
   return savedVersion !== APP_VERSION;
 };
 
-export const forceAppUpdateAndClearCache = async () => {
+export const forceAppUpdateAndClearCache = async (clearLocalStorage = true) => {
   try {
     // 1. Unregister Service Workers
     if ('serviceWorker' in navigator) {
@@ -38,15 +38,26 @@ export const forceAppUpdateAndClearCache = async () => {
       }
     }
 
-    // 3. Update version in localStorage
+    // 3. Explicitly clear localStorage if requested
+    if (clearLocalStorage) {
+      localStorage.clear();
+    }
+
+    // Update version in localStorage
     localStorage.setItem('alquran_app_version', APP_VERSION);
 
-    // 4. Force reload page with cache busting
-    const timestamp = Date.now();
-    const cleanUrl = window.location.origin + window.location.pathname + `?update=${timestamp}`;
-    window.location.href = cleanUrl;
+    // 4. Force hard reload via window.location.reload(true)
+    try {
+      (window.location as any).reload(true);
+    } catch {
+      window.location.reload();
+    }
   } catch (err) {
     console.error('Error clearing app cache and updating:', err);
-    window.location.reload();
+    try {
+      (window.location as any).reload(true);
+    } catch {
+      window.location.reload();
+    }
   }
 };

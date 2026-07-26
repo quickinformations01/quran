@@ -46,7 +46,7 @@ export const UpdateNotificationBanner: React.FC = () => {
             className="px-3.5 py-1.5 rounded-xl bg-[#064E3B] hover:bg-[#064E3B]/90 text-white font-bold text-xs transition cursor-pointer shadow-sm flex items-center gap-1.5 shrink-0"
           >
             <RefreshCw className={`w-3.5 h-3.5 text-[#D4AF37] ${isUpdating ? 'animate-spin' : ''}`} />
-            <span>{isUpdating ? 'Clearing Cache & Updating...' : 'Update & Clear Cache'}</span>
+            <span>{isUpdating ? 'Clearing Cache & Refreshing...' : 'Clear Cache & Refresh'}</span>
           </button>
 
           <button

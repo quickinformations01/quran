@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Settings, Check, Sliders, Type, BookOpen } from 'lucide-react';
+import { X, Settings, Check, Sliders, Type, BookOpen, Bell } from 'lucide-react';
 import { AppSettings, FiqhSchool, CalculationMethodName } from '../types';
 
 interface Props {
@@ -161,6 +161,29 @@ export const SettingsModal: React.FC<Props> = ({
               />
             </label>
           </div>
+        </div>
+
+        {/* Local Prayer Notifications Toggle */}
+        <div className="space-y-2 pt-2 border-t border-gray-200">
+          <label className="text-xs font-bold text-[#b45309] uppercase tracking-wider block">
+            Prayer & Adhkar Notifications
+          </label>
+          <label className="flex items-center justify-between p-3 rounded-2xl bg-emerald-50/50 border border-emerald-200 text-xs cursor-pointer">
+            <div className="space-y-0.5 pr-2">
+              <span className="text-gray-900 font-bold block flex items-center gap-1.5">
+                <Bell className="w-3.5 h-3.5 text-[#064E3B]" /> Enable Offline Local Prayer Alarms
+              </span>
+              <span className="text-[11px] text-gray-500 block">
+                Triggers audio alarms & native browser alerts at computed prayer times.
+              </span>
+            </div>
+            <input
+              type="checkbox"
+              checked={settings.enablePrayerNotifications !== false}
+              onChange={(e) => setSettings({ ...settings, enablePrayerNotifications: e.target.checked })}
+              className="w-5 h-5 accent-[#064E3B] rounded cursor-pointer shrink-0"
+            />
+          </label>
         </div>
 
         {/* Done Button */}

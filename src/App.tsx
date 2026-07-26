@@ -59,6 +59,7 @@ export default function App() {
       showTransliteration: true,
       arabicFontFamily: 'Amiri',
       nightMode: true,
+      enablePrayerNotifications: true,
     };
   });
 
@@ -100,6 +101,8 @@ export default function App() {
   // Periodic Background Local Prayer Reminder Checker (runs every 30 seconds)
   useEffect(() => {
     const checkReminders = () => {
+      if (settings.enablePrayerNotifications === false) return;
+
       try {
         const saved = localStorage.getItem('alquran_reminders');
         if (saved) {
@@ -114,7 +117,7 @@ export default function App() {
     checkReminders();
     const interval = setInterval(checkReminders, 30000);
     return () => clearInterval(interval);
-  }, []);
+  }, [settings.enablePrayerNotifications]);
 
   const handleUnlockApp = (initialTab?: string) => {
     localStorage.setItem('alquran_pwa_unlocked', 'true');

@@ -93,4 +93,5 @@ export interface AppSettings {
   showTransliteration: boolean;
   arabicFontFamily: 'Amiri' | 'Scheherazade New';
   nightMode: boolean;
+  enablePrayerNotifications?: boolean;
 }
