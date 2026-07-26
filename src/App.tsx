@@ -16,13 +16,8 @@ import { PRESET_CITIES } from './utils/prayerCalculator';
 import { Download } from 'lucide-react';
 
 export default function App() {
-  // PWA Installation Gate state
-  const [isAppUnlocked, setIsAppUnlocked] = useState<boolean>(() => {
-    // If running in standalone PWA or user previously unlocked, unlock
-    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || (window.navigator as any).standalone === true;
-    const unlockedLocal = localStorage.getItem('alquran_pwa_unlocked');
-    return isStandalone || unlockedLocal === 'true';
-  });
+  // PWA Installation state (Always unlocked by default so users have instant access)
+  const [isAppUnlocked, setIsAppUnlocked] = useState<boolean>(true);
 
   // Check if currently running standalone PWA
   const isStandalone = typeof window !== 'undefined' && (
@@ -30,7 +25,9 @@ export default function App() {
   );
 
   // Navigation Tab ('home', 'quran', 'namaz', 'tasbeeh', 'reminders', 'manzil', 'punch')
-  const [activeTab, setActiveTab] = useState<string>('home');
+  const [activeTab, setActiveTab] = useState<string>(() => {
+    return localStorage.getItem('alquran_active_tab') || 'home';
+  });
 
   // Location State
   const [location, setLocation] = useState<LocationData>(() => {
@@ -88,8 +85,9 @@ export default function App() {
     localStorage.setItem('alquran_bookmarks', JSON.stringify(bookmarks));
   }, [bookmarks]);
 
-  // Scroll to top whenever activeTab changes
+  // Scroll to top and save active tab whenever activeTab changes
   useEffect(() => {
+    localStorage.setItem('alquran_active_tab', activeTab);
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [activeTab]);
 

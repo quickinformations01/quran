@@ -97,6 +97,7 @@ export const HomeGridView: React.FC<Props> = ({
           {/* Quick Location & Next Prayer Card */}
           <div className="shrink-0 bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20 space-y-2 min-w-[200px]">
             <button
+              type="button"
               onClick={onOpenLocationModal}
               className="flex items-center gap-1.5 text-xs text-[#D4AF37] font-semibold hover:underline cursor-pointer"
             >
@@ -105,17 +106,28 @@ export const HomeGridView: React.FC<Props> = ({
             </button>
 
             {nextSlot ? (
-              <div className="space-y-0.5">
-                <p className="text-[10px] text-emerald-200 uppercase font-bold tracking-wider">
+              <button
+                type="button"
+                onClick={() => onSelectTab('namaz')}
+                className="w-full text-left space-y-0.5 hover:opacity-90 transition cursor-pointer group"
+                title="View Full Prayer Schedule & Qibla"
+              >
+                <p className="text-[10px] text-emerald-200 uppercase font-bold tracking-wider group-hover:text-[#D4AF37] transition-colors">
                   Next Prayer:
                 </p>
                 <div className="flex items-baseline justify-between gap-3">
                   <span className="text-base font-bold text-white font-serif">{nextSlot.name}</span>
                   <span className="text-sm font-mono font-bold text-[#D4AF37]">{nextSlot.time}</span>
                 </div>
-              </div>
+              </button>
             ) : (
-              <p className="text-xs text-white/80 font-medium">All today's prayers completed</p>
+              <button
+                type="button"
+                onClick={() => onSelectTab('namaz')}
+                className="w-full text-left text-xs text-white/80 font-medium hover:text-[#D4AF37] cursor-pointer"
+              >
+                All today's prayers completed
+              </button>
             )}
           </div>
         </div>
@@ -127,7 +139,7 @@ export const HomeGridView: React.FC<Props> = ({
           <h2 className="text-lg sm:text-xl font-serif font-bold text-gray-900 flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-[#064E3B]" /> Islamic Features Grid
           </h2>
-          <span className="text-xs text-gray-500 font-medium">Tap any section to open</span>
+          <span className="text-xs text-gray-500 font-medium">Tap any card to open feature</span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -136,12 +148,13 @@ export const HomeGridView: React.FC<Props> = ({
             return (
               <button
                 key={item.id}
+                type="button"
                 onClick={() => onSelectTab(item.id)}
-                className="group text-left p-5 rounded-3xl bg-white border border-gray-200 hover:border-[#064E3B] shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer flex flex-col justify-between relative overflow-hidden"
+                className="group text-left p-5 rounded-3xl bg-white border border-gray-200 hover:border-[#064E3B] shadow-sm hover:shadow-md active:scale-[0.98] transition-all duration-200 cursor-pointer flex flex-col justify-between relative overflow-hidden"
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <div className="w-12 h-12 rounded-2xl bg-[#064E3B] text-[#D4AF37] flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
+                    <div className="w-12 h-12 rounded-2xl bg-[#064E3B] text-[#D4AF37] flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
                       <Icon className="w-6 h-6" />
                     </div>
                     <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#064E3B]/10 text-[#064E3B]">
@@ -159,7 +172,10 @@ export const HomeGridView: React.FC<Props> = ({
 
                 <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-[#064E3B]">
                   <span>{item.tag}</span>
-                  <ArrowRight className="w-4 h-4 text-[#D4AF37] group-hover:translate-x-1 transition-transform" />
+                  <div className="flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                    <span className="text-[11px] text-[#D4AF37]">Open</span>
+                    <ArrowRight className="w-4 h-4 text-[#D4AF37]" />
+                  </div>
                 </div>
               </button>
             );
