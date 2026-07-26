@@ -8,6 +8,10 @@ import { ManzilView } from './components/ManzilView';
 import { PunchSurahView } from './components/PunchSurahView';
 import { TasbeehView } from './components/TasbeehView';
 import { RemindersView } from './components/RemindersView';
+import { NamesOfAllahView } from './components/NamesOfAllahView';
+import { DuasAzkarView } from './components/DuasAzkarView';
+import { IslamicCalendarView } from './components/IslamicCalendarView';
+import { BackupRestoreView } from './components/BackupRestoreView';
 import { SettingsModal } from './components/SettingsModal';
 import { LocationModal } from './components/LocationModal';
 import { PWAInstallOverlay } from './components/PWAInstallOverlay';
@@ -181,6 +185,14 @@ export default function App() {
             {activeTab === 'tasbeeh' && <TasbeehView />}
 
             {activeTab === 'reminders' && <RemindersView />}
+
+            {activeTab === 'names' && <NamesOfAllahView />}
+
+            {activeTab === 'duas' && <DuasAzkarView />}
+
+            {activeTab === 'calendar' && <IslamicCalendarView />}
+
+            {activeTab === 'backup' && <BackupRestoreView />}
           </main>
 
           {/* Floating Install Shortcut Button if not standalone PWA */}

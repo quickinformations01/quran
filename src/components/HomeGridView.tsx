@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, Shield, Flame, Hash, Compass, Bell, ArrowRight, Sparkles, MapPin, Heart } from 'lucide-react';
+import { BookOpen, Shield, Flame, Hash, Compass, Bell, ArrowRight, Sparkles, MapPin, Heart, Calendar, Database, Star } from 'lucide-react';
 import { LocationData, AppSettings } from '../types';
 import { calculatePrayerTimes } from '../utils/prayerCalculator';
 
@@ -104,6 +104,62 @@ export const HomeGridView: React.FC<Props> = ({
       badgeBg: 'bg-amber-400/20 text-amber-200 border-amber-400/40',
       tagColor: 'text-amber-300',
       arrowColor: 'text-amber-300',
+    },
+    {
+      id: 'names',
+      title: '99 Names of Allah',
+      subtitle: 'Asma-ul-Husna with Audio Pronunciation, Urdu Translation & Virtues',
+      icon: Star,
+      tag: 'Asma-ul-Husna',
+      badge: '99 Names',
+      cardGradient: 'from-[#065F46] via-[#047857] to-[#022C22]',
+      borderStyle: 'border-emerald-300/50 hover:border-amber-300',
+      iconBoxBg: 'bg-amber-300 text-emerald-950',
+      badgeBg: 'bg-amber-300/20 text-amber-200 border-amber-300/40',
+      tagColor: 'text-amber-200',
+      arrowColor: 'text-amber-300',
+    },
+    {
+      id: 'duas',
+      title: 'Daily Duas & Azkar',
+      subtitle: 'Morning & Evening Remembrances, Sleeping & Travel Supplications',
+      icon: Heart,
+      tag: 'Daily Masnoon',
+      badge: 'Azkar',
+      cardGradient: 'from-[#4C1D95] via-[#3B0764] to-[#1E1B4B]',
+      borderStyle: 'border-purple-400/50 hover:border-purple-300',
+      iconBoxBg: 'bg-purple-300 text-purple-950',
+      badgeBg: 'bg-purple-300/20 text-purple-200 border-purple-300/40',
+      tagColor: 'text-purple-300',
+      arrowColor: 'text-purple-300',
+    },
+    {
+      id: 'calendar',
+      title: 'Islamic Calendar & Ramadan',
+      subtitle: 'Hijri Date, Ramadan Fast Tracker & Major Sacred Events',
+      icon: Calendar,
+      tag: 'Hijri & Fasting',
+      badge: 'Calendar',
+      cardGradient: 'from-[#9F1239] via-[#881337] to-[#4C0519]',
+      borderStyle: 'border-rose-300/50 hover:border-amber-300',
+      iconBoxBg: 'bg-amber-300 text-rose-950',
+      badgeBg: 'bg-amber-300/20 text-amber-200 border-amber-300/40',
+      tagColor: 'text-amber-200',
+      arrowColor: 'text-amber-300',
+    },
+    {
+      id: 'backup',
+      title: 'Offline Data Backup',
+      subtitle: 'Export & Restore your Bookmarks and Settings as local JSON file',
+      icon: Database,
+      tag: 'Local JSON',
+      badge: 'Storage',
+      cardGradient: 'from-[#1E293B] via-[#0F172A] to-[#020617]',
+      borderStyle: 'border-slate-400/50 hover:border-slate-200',
+      iconBoxBg: 'bg-slate-200 text-slate-900',
+      badgeBg: 'bg-slate-200/20 text-slate-200 border-slate-300/40',
+      tagColor: 'text-slate-300',
+      arrowColor: 'text-slate-200',
     },
   ];
 
