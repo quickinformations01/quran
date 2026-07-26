@@ -3,7 +3,7 @@ import { Download, CheckCircle2, ShieldCheck, Sparkles, Smartphone, Share, PlusS
 import { motion, AnimatePresence } from 'motion/react';
 
 interface Props {
-  onInstalledOrUnlocked: () => void;
+  onInstalledOrUnlocked: (initialTab?: string) => void;
 }
 
 export const PWAInstallOverlay: React.FC<Props> = ({ onInstalledOrUnlocked }) => {
@@ -106,46 +106,61 @@ export const PWAInstallOverlay: React.FC<Props> = ({ onInstalledOrUnlocked }) =>
         </div>
 
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[#D4AF37] text-xs font-semibold tracking-wide uppercase mb-3">
-          <ShieldCheck className="w-3.5 h-3.5" /> PWA Installation Required
+          <ShieldCheck className="w-3.5 h-3.5" /> PWA Application Access
         </div>
 
         <h1 className="text-2xl sm:text-3xl font-bold font-serif text-white tracking-tight mb-2">
           Al-Quran & Namaz App
         </h1>
         <p className="text-emerald-100/90 text-sm sm:text-base leading-relaxed mb-6 font-sans">
-          To access the complete Holy Quran, Manzil, Punch Surah, and accurate offline prayer times, please install this Progressive Web App on your device.
+          Select any feature below or install as PWA to open the full app experience:
         </p>
 
-        {/* Feature Highlights Grid */}
+        {/* Feature Highlights Interactive Buttons Grid */}
         <div className="grid grid-cols-2 gap-2.5 text-left mb-6 text-xs sm:text-sm">
-          <div className="flex items-start gap-2.5 p-2.5 rounded-xl bg-white/10 border border-white/10">
-            <div className="p-1.5 bg-[#D4AF37]/20 rounded-lg text-[#D4AF37]">📖</div>
+          <button
+            onClick={() => onInstalledOrUnlocked('quran')}
+            className="flex items-start gap-2.5 p-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 transition cursor-pointer text-left group"
+          >
+            <div className="p-1.5 bg-[#D4AF37]/20 rounded-lg text-[#D4AF37] group-hover:scale-110 transition-transform">📖</div>
             <div>
-              <p className="font-semibold text-white">114 Surahs</p>
-              <p className="text-emerald-100/80 text-[11px]">Full Quran with translations</p>
+              <p className="font-bold text-white group-hover:text-[#D4AF37] transition-colors">114 Surahs</p>
+              <p className="text-emerald-100/80 text-[11px]">Tap to open Holy Quran</p>
             </div>
-          </div>
-          <div className="flex items-start gap-2.5 p-2.5 rounded-xl bg-white/10 border border-white/10">
-            <div className="p-1.5 bg-[#D4AF37]/20 rounded-lg text-[#D4AF37]">🕋</div>
+          </button>
+
+          <button
+            onClick={() => onInstalledOrUnlocked('namaz')}
+            className="flex items-start gap-2.5 p-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 transition cursor-pointer text-left group"
+          >
+            <div className="p-1.5 bg-[#D4AF37]/20 rounded-lg text-[#D4AF37] group-hover:scale-110 transition-transform">🕋</div>
             <div>
-              <p className="font-semibold text-white">Namaz Times</p>
-              <p className="text-emerald-100/80 text-[11px]">Hanafi & Shafi'i Offline Math</p>
+              <p className="font-bold text-white group-hover:text-[#D4AF37] transition-colors">Namaz Times</p>
+              <p className="text-emerald-100/80 text-[11px]">Hanafi & Shafi'i Salat</p>
             </div>
-          </div>
-          <div className="flex items-start gap-2.5 p-2.5 rounded-xl bg-white/10 border border-white/10">
-            <div className="p-1.5 bg-[#D4AF37]/20 rounded-lg text-[#D4AF37]">🛡️</div>
+          </button>
+
+          <button
+            onClick={() => onInstalledOrUnlocked('manzil')}
+            className="flex items-start gap-2.5 p-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 transition cursor-pointer text-left group"
+          >
+            <div className="p-1.5 bg-[#D4AF37]/20 rounded-lg text-[#D4AF37] group-hover:scale-110 transition-transform">🛡️</div>
             <div>
-              <p className="font-semibold text-white">Manzil Verses</p>
+              <p className="font-bold text-white group-hover:text-[#D4AF37] transition-colors">Manzil Verses</p>
               <p className="text-emerald-100/80 text-[11px]">Daily protection & Ruqyah</p>
             </div>
-          </div>
-          <div className="flex items-start gap-2.5 p-2.5 rounded-xl bg-white/10 border border-white/10">
-            <div className="p-1.5 bg-[#D4AF37]/20 rounded-lg text-[#D4AF37]">⚡</div>
+          </button>
+
+          <button
+            onClick={() => onInstalledOrUnlocked('punch')}
+            className="flex items-start gap-2.5 p-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 transition cursor-pointer text-left group"
+          >
+            <div className="p-1.5 bg-[#D4AF37]/20 rounded-lg text-[#D4AF37] group-hover:scale-110 transition-transform">⚡</div>
             <div>
-              <p className="font-semibold text-white">Punch Surahs</p>
+              <p className="font-bold text-white group-hover:text-[#D4AF37] transition-colors">Punch Surahs</p>
               <p className="text-emerald-100/80 text-[11px]">Yaseen, Ar-Rahman, Mulk...</p>
             </div>
-          </div>
+          </button>
         </div>
 
         {/* Install Action Button */}
@@ -160,7 +175,7 @@ export const PWAInstallOverlay: React.FC<Props> = ({ onInstalledOrUnlocked }) =>
             {installSuccess ? (
               <>
                 <CheckCircle2 className="w-5 h-5 text-[#064E3B] animate-bounce" />
-                <span>Installed! Opening Dashboard...</span>
+                <span>Installed! Opening App...</span>
               </>
             ) : isInstalling ? (
               <>
@@ -179,11 +194,11 @@ export const PWAInstallOverlay: React.FC<Props> = ({ onInstalledOrUnlocked }) =>
           <button
             onClick={() => {
               setInstallSuccess(true);
-              setTimeout(onInstalledOrUnlocked, 600);
+              setTimeout(() => onInstalledOrUnlocked('home'), 400);
             }}
             className="w-full py-2.5 px-4 rounded-xl text-emerald-100 hover:text-white text-xs font-medium hover:bg-white/10 transition flex items-center justify-center gap-1.5 cursor-pointer"
           >
-            <span>Preview in Web Browser</span>
+            <span>Open Home Dashboard Directly</span>
             <ArrowRight className="w-3.5 h-3.5 text-[#D4AF37]" />
           </button>
         </div>

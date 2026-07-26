@@ -88,9 +88,22 @@ export default function App() {
     localStorage.setItem('alquran_bookmarks', JSON.stringify(bookmarks));
   }, [bookmarks]);
 
-  const handleUnlockApp = () => {
+  // Scroll to top whenever activeTab changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [activeTab]);
+
+  const handleUnlockApp = (initialTab?: string) => {
     localStorage.setItem('alquran_pwa_unlocked', 'true');
     setIsAppUnlocked(true);
+    if (initialTab) {
+      setActiveTab(initialTab);
+    }
+  };
+
+  const handleSelectTab = (tab: string) => {
+    setActiveTab(tab);
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
   const stopAllAudio = () => {
@@ -110,7 +123,7 @@ export default function App() {
           {/* Header Bar */}
           <Header
             activeTab={activeTab}
-            setActiveTab={setActiveTab}
+            setActiveTab={handleSelectTab}
             location={location}
             settings={settings}
             onOpenSettings={() => setIsSettingsOpen(true)}
@@ -123,7 +136,7 @@ export default function App() {
           <main className="flex-1 px-4 sm:px-6 py-6">
             {activeTab === 'home' && (
               <HomeGridView
-                onSelectTab={setActiveTab}
+                onSelectTab={handleSelectTab}
                 location={location}
                 settings={settings}
                 onOpenLocationModal={() => setIsLocationOpen(true)}
@@ -185,7 +198,7 @@ export default function App() {
           )}
 
           {/* Bottom Tab Bar */}
-          <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} />
+          <BottomNav activeTab={activeTab} setActiveTab={handleSelectTab} />
 
           {/* Modals */}
           <SettingsModal
