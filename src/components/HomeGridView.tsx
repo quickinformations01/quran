@@ -24,20 +24,30 @@ export const HomeGridView: React.FC<Props> = ({
     {
       id: 'quran',
       title: 'Quran Paak',
-      subtitle: 'Complete 114 Surahs with Urdu/English Translation & Audio',
+      subtitle: 'Complete 114 Surahs with Urdu/English Translation & Recitation Audio',
       icon: BookOpen,
       tag: '114 Surahs',
-      color: 'bg-[#064E3B]',
       badge: 'Al-Quran',
+      cardGradient: 'from-[#064E3B] via-[#04382A] to-[#02241B]',
+      borderStyle: 'border-[#D4AF37]/50 hover:border-[#D4AF37]',
+      iconBoxBg: 'bg-[#D4AF37] text-[#064E3B]',
+      badgeBg: 'bg-[#D4AF37]/20 text-[#D4AF37] border-[#D4AF37]/40',
+      tagColor: 'text-[#D4AF37]',
+      arrowColor: 'text-[#D4AF37]',
     },
     {
       id: 'manzil',
       title: 'Manzil Protection',
-      subtitle: '33 Sacred Verses for Daily Ruqyah, Safety & Healing',
+      subtitle: '33 Sacred Verses for Daily Ruqyah, Safety & Spiritual Healing',
       icon: Shield,
-      tag: 'Ruqyah Verses',
-      color: 'bg-[#064E3B]',
+      tag: '33 Verses',
       badge: 'Protection',
+      cardGradient: 'from-[#1E3A8A] via-[#1E1B4B] to-[#0F172A]',
+      borderStyle: 'border-blue-400/50 hover:border-blue-300',
+      iconBoxBg: 'bg-blue-400 text-blue-950',
+      badgeBg: 'bg-blue-400/20 text-blue-200 border-blue-400/40',
+      tagColor: 'text-blue-300',
+      arrowColor: 'text-blue-300',
     },
     {
       id: 'punch',
@@ -45,26 +55,41 @@ export const HomeGridView: React.FC<Props> = ({
       subtitle: '5 Blessed Surahs: Yaseen, Ar-Rahman, Mulk, Waqiah, Kahf',
       icon: Flame,
       tag: '5 Surahs',
-      color: 'bg-[#064E3B]',
       badge: 'Fazail',
+      cardGradient: 'from-[#831843] via-[#4C0519] to-[#2E020E]',
+      borderStyle: 'border-rose-400/50 hover:border-rose-300',
+      iconBoxBg: 'bg-rose-400 text-rose-950',
+      badgeBg: 'bg-rose-400/20 text-rose-200 border-rose-400/40',
+      tagColor: 'text-rose-300',
+      arrowColor: 'text-rose-300',
     },
     {
       id: 'tasbeeh',
       title: 'Digital Tasbeeh',
-      subtitle: 'Count Dhikr with 33, 100, 313, 500, 1000 Target Alarms',
+      subtitle: 'Count Dhikr with Target Alarms (33, 100, 313, 500, 1000)',
       icon: Hash,
       tag: 'Counter & Alarm',
-      color: 'bg-[#064E3B]',
       badge: 'Dhikr',
+      cardGradient: 'from-[#0F766E] via-[#115E59] to-[#042F2C]',
+      borderStyle: 'border-teal-300/50 hover:border-teal-200',
+      iconBoxBg: 'bg-teal-300 text-teal-950',
+      badgeBg: 'bg-teal-300/20 text-teal-200 border-teal-300/40',
+      tagColor: 'text-teal-300',
+      arrowColor: 'text-teal-300',
     },
     {
       id: 'namaz',
       title: 'Namaz & Qibla',
       subtitle: 'Accurate Prayer Schedule & Live Kaaba Direction Compass',
       icon: Compass,
-      tag: 'Prayer & Qibla',
-      color: 'bg-[#064E3B]',
+      tag: 'Salat & Kaaba',
       badge: 'Salat',
+      cardGradient: 'from-[#312E81] via-[#1E1B4B] to-[#0A0A1A]',
+      borderStyle: 'border-indigo-400/50 hover:border-amber-400',
+      iconBoxBg: 'bg-amber-400 text-indigo-950',
+      badgeBg: 'bg-amber-400/20 text-amber-300 border-amber-400/40',
+      tagColor: 'text-amber-300',
+      arrowColor: 'text-amber-300',
     },
     {
       id: 'reminders',
@@ -72,8 +97,13 @@ export const HomeGridView: React.FC<Props> = ({
       subtitle: 'Set Daily Prayer Alarms & Dhikr Practice Notifications',
       icon: Bell,
       tag: 'Daily Alarms',
-      color: 'bg-[#064E3B]',
-      badge: 'Notifications',
+      badge: 'Alarms',
+      cardGradient: 'from-[#78350F] via-[#451A03] to-[#1C1917]',
+      borderStyle: 'border-amber-500/50 hover:border-amber-400',
+      iconBoxBg: 'bg-amber-400 text-amber-950',
+      badgeBg: 'bg-amber-400/20 text-amber-200 border-amber-400/40',
+      tagColor: 'text-amber-300',
+      arrowColor: 'text-amber-300',
     },
   ];
 
@@ -90,7 +120,7 @@ export const HomeGridView: React.FC<Props> = ({
               Al-Quran & Islamic Hub
             </h1>
             <p className="text-emerald-100/90 text-xs sm:text-sm leading-relaxed font-sans">
-              Explore Quran Paak, Manzil, Punch Surahs, Digital Tasbeeh with Target Alarms, and Live Namaz Times with Qibla Direction.
+              Tap any colored card below to explore Quran Paak, Manzil, Punch Surahs, Digital Tasbeeh, and Namaz Times.
             </p>
           </div>
 
@@ -139,7 +169,9 @@ export const HomeGridView: React.FC<Props> = ({
           <h2 className="text-lg sm:text-xl font-serif font-bold text-gray-900 flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-[#064E3B]" /> Islamic Features Grid
           </h2>
-          <span className="text-xs text-gray-500 font-medium">Tap any card to open feature</span>
+          <span className="text-xs text-gray-600 font-semibold bg-emerald-100 px-2.5 py-1 rounded-full text-[#064E3B]">
+            Tap any card to open
+          </span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -150,31 +182,31 @@ export const HomeGridView: React.FC<Props> = ({
                 key={item.id}
                 type="button"
                 onClick={() => onSelectTab(item.id)}
-                className="group text-left p-5 rounded-3xl bg-white border border-gray-200 hover:border-[#064E3B] shadow-sm hover:shadow-md active:scale-[0.98] transition-all duration-200 cursor-pointer flex flex-col justify-between relative overflow-hidden"
+                className={`group text-left p-5 rounded-3xl bg-gradient-to-br ${item.cardGradient} border ${item.borderStyle} shadow-lg hover:shadow-2xl active:scale-[0.98] transition-all duration-300 cursor-pointer flex flex-col justify-between relative overflow-hidden text-white`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <div className="w-12 h-12 rounded-2xl bg-[#064E3B] text-[#D4AF37] flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                    <div className={`w-12 h-12 rounded-2xl ${item.iconBoxBg} flex items-center justify-center shadow-md group-hover:scale-110 transition-transform`}>
                       <Icon className="w-6 h-6" />
                     </div>
-                    <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#064E3B]/10 text-[#064E3B]">
+                    <span className={`text-[11px] font-bold px-2.5 py-1 rounded-full border ${item.badgeBg}`}>
                       {item.badge}
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-serif font-bold text-gray-900 group-hover:text-[#064E3B] transition-colors mb-1">
+                  <h3 className="text-xl font-serif font-bold text-white group-hover:text-amber-200 transition-colors mb-1.5 tracking-tight">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-gray-600 line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-white/80 leading-relaxed font-sans line-clamp-2">
                     {item.subtitle}
                   </p>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-[#064E3B]">
-                  <span>{item.tag}</span>
-                  <div className="flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                    <span className="text-[11px] text-[#D4AF37]">Open</span>
-                    <ArrowRight className="w-4 h-4 text-[#D4AF37]" />
+                <div className="mt-5 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-bold">
+                  <span className={item.tagColor}>{item.tag}</span>
+                  <div className={`flex items-center gap-1.5 ${item.arrowColor} group-hover:translate-x-1 transition-transform`}>
+                    <span className="text-xs uppercase tracking-wider">Open</span>
+                    <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>
               </button>
@@ -201,3 +233,4 @@ export const HomeGridView: React.FC<Props> = ({
     </div>
   );
 };
+
