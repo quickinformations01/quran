@@ -34,6 +34,18 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Message Event - listen for update and clear cache signals
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+  if (event.data && event.data.type === 'CLEAR_CACHE') {
+    caches.keys().then((keys) => {
+      keys.forEach((key) => caches.delete(key));
+    });
+  }
+});
+
 // Fetch Event - Network First for HTML/navigation, Stale-While-Revalidate for static assets
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;

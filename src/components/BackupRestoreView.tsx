@@ -1,8 +1,19 @@
 import React, { useState } from 'react';
-import { Download, Upload, ShieldCheck, Database, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Download, Upload, ShieldCheck, Database, CheckCircle2, AlertCircle, RefreshCw, Trash2 } from 'lucide-react';
+import { forceAppUpdateAndClearCache, APP_VERSION } from '../utils/updateManager';
 
 export const BackupRestoreView: React.FC = () => {
   const [statusMessage, setStatusMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [isClearingCache, setIsClearingCache] = useState<boolean>(false);
+
+  const handleForceUpdateAndClearCache = async () => {
+    setIsClearingCache(true);
+    setStatusMessage({
+      type: 'success',
+      text: 'Clearing Service Worker caches, unregistering stale workers, and refreshing application...',
+    });
+    await forceAppUpdateAndClearCache();
+  };
 
   const handleExportBackup = () => {
     try {
@@ -98,7 +109,7 @@ export const BackupRestoreView: React.FC = () => {
       )}
 
       {/* Action Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Export Card */}
         <div className="bg-white rounded-3xl border border-gray-200 p-6 shadow-sm hover:border-[#064E3B] transition-all space-y-4 flex flex-col justify-between">
           <div className="space-y-2">
@@ -136,6 +147,32 @@ export const BackupRestoreView: React.FC = () => {
             <Upload className="w-4 h-4" /> Select & Restore JSON File
             <input type="file" accept=".json" onChange={handleImportBackup} className="hidden" />
           </label>
+        </div>
+
+        {/* Update & Clear Cache Card */}
+        <div className="bg-white rounded-3xl border border-amber-200 bg-amber-50/20 p-6 shadow-sm hover:border-amber-400 transition-all space-y-4 flex flex-col justify-between">
+          <div className="space-y-2">
+            <div className="w-12 h-12 rounded-2xl bg-amber-100 text-[#064E3B] flex items-center justify-center">
+              <RefreshCw className="w-6 h-6 text-[#064E3B]" />
+            </div>
+            <div className="flex items-center gap-2">
+              <h2 className="text-lg font-serif font-bold text-gray-900">App Version {APP_VERSION}</h2>
+              <span className="bg-amber-200 text-[#064E3B] text-[10px] font-bold px-2 py-0.5 rounded-md">Latest</span>
+            </div>
+            <p className="text-xs text-gray-600 leading-relaxed">
+              Unregisters old Service Worker instances, purges stale offline caches, and reloads the app to ensure you have the latest updates.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleForceUpdateAndClearCache}
+            disabled={isClearingCache}
+            className="w-full py-3 px-4 rounded-2xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs transition cursor-pointer shadow-md flex items-center justify-center gap-2 disabled:opacity-50"
+          >
+            <RefreshCw className={`w-4 h-4 ${isClearingCache ? 'animate-spin' : ''}`} />
+            <span>{isClearingCache ? 'Updating & Clearing Cache...' : 'Force App Update & Clear Cache'}</span>
+          </button>
         </div>
       </div>
     </div>

@@ -15,8 +15,10 @@ import { BackupRestoreView } from './components/BackupRestoreView';
 import { SettingsModal } from './components/SettingsModal';
 import { LocationModal } from './components/LocationModal';
 import { PWAInstallOverlay } from './components/PWAInstallOverlay';
+import { UpdateNotificationBanner } from './components/UpdateNotificationBanner';
 import { AppSettings, LocationData, Bookmark } from './types';
 import { PRESET_CITIES } from './utils/prayerCalculator';
+import { checkAndTriggerPrayerReminders } from './utils/notificationService';
 import { Download } from 'lucide-react';
 
 export default function App() {
@@ -95,6 +97,25 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [activeTab]);
 
+  // Periodic Background Local Prayer Reminder Checker (runs every 30 seconds)
+  useEffect(() => {
+    const checkReminders = () => {
+      try {
+        const saved = localStorage.getItem('alquran_reminders');
+        if (saved) {
+          const list = JSON.parse(saved);
+          checkAndTriggerPrayerReminders(list);
+        }
+      } catch (e) {
+        /* ignore */
+      }
+    };
+
+    checkReminders();
+    const interval = setInterval(checkReminders, 30000);
+    return () => clearInterval(interval);
+  }, []);
+
   const handleUnlockApp = (initialTab?: string) => {
     localStorage.setItem('alquran_pwa_unlocked', 'true');
     setIsAppUnlocked(true);
@@ -114,6 +135,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#FDFCF0] text-gray-900 flex flex-col font-sans selection:bg-[#D4AF37] selection:text-[#064E3B]">
+      {/* Top App Update Notification Banner */}
+      <UpdateNotificationBanner />
+
       {/* Installation Gate Overlay */}
       {!isAppUnlocked && (
         <PWAInstallOverlay onInstalledOrUnlocked={handleUnlockApp} />

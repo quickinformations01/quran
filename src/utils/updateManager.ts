@@ -1,0 +1,52 @@
+export const APP_VERSION = 'v3.2.0';
+
+export interface UpdateInfo {
+  hasUpdate: boolean;
+  version: string;
+}
+
+export const checkForAppUpdates = async (): Promise<boolean> => {
+  if (typeof window === 'undefined') return false;
+
+  // Check if saved version matches current APP_VERSION
+  const savedVersion = localStorage.getItem('alquran_app_version');
+  if (!savedVersion) {
+    localStorage.setItem('alquran_app_version', APP_VERSION);
+    return false;
+  }
+
+  return savedVersion !== APP_VERSION;
+};
+
+export const forceAppUpdateAndClearCache = async () => {
+  try {
+    // 1. Unregister Service Workers
+    if ('serviceWorker' in navigator) {
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      for (const registration of registrations) {
+        await registration.unregister();
+        console.log('[SW] Service Worker unregistered for update');
+      }
+    }
+
+    // 2. Clear all cache storages
+    if ('caches' in window) {
+      const keys = await caches.keys();
+      for (const key of keys) {
+        await caches.delete(key);
+        console.log('[SW] Cache deleted:', key);
+      }
+    }
+
+    // 3. Update version in localStorage
+    localStorage.setItem('alquran_app_version', APP_VERSION);
+
+    // 4. Force reload page with cache busting
+    const timestamp = Date.now();
+    const cleanUrl = window.location.origin + window.location.pathname + `?update=${timestamp}`;
+    window.location.href = cleanUrl;
+  } catch (err) {
+    console.error('Error clearing app cache and updating:', err);
+    window.location.reload();
+  }
+};
